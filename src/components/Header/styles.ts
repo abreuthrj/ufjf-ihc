@@ -6,5 +6,4 @@ export const TopBar = styled(Box)((props) => ({
   height: 80,
   boxShadow: "-2px 0 6px #00000040",
   marginBottom: 24,
-  padding: 2,
 }));
