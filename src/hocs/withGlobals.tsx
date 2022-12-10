@@ -7,7 +7,7 @@ const withGlobals = (component: React.ReactNode) => {
     <CustomWrapper>
       <Menu />
 
-      <Box width="100%" height="100%" p={4} overflow="hidden">
+      <Box width="100%" p={4} overflow="hidden">
         {component}
       </Box>
     </CustomWrapper>

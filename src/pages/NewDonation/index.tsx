@@ -11,6 +11,8 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import ItemsList from "../../components/ItemsList";
 import PageTitle from "../../components/PageTitle";
 import ItemsMock from "../../_mocks_/items";
@@ -26,6 +28,8 @@ const FORM_INITIAL = {
 };
 
 const NewDonation: React.FC = () => {
+  const navigate = useNavigate();
+
   const [
     {
       receptionMethod,
@@ -64,6 +68,18 @@ const NewDonation: React.FC = () => {
       ...prev,
       items: prev.items.filter((i) => i.id !== itemId),
     }));
+  };
+
+  const handleSubmit = () => {
+    toast("Doação cadastrada com sucesso", {
+      type: "success",
+    });
+
+    setForm(FORM_INITIAL);
+  };
+
+  const handleCancel = () => {
+    navigate(-1);
   };
 
   return (
@@ -181,8 +197,12 @@ const NewDonation: React.FC = () => {
         </Box>
 
         <Box display="flex" columnGap={1} marginLeft="auto">
-          <CustomButton variant="outlined">Cancelar</CustomButton>
-          <CustomButton variant="contained">Enviar para análise</CustomButton>
+          <CustomButton variant="outlined" onClick={handleCancel}>
+            Cancelar
+          </CustomButton>
+          <CustomButton variant="contained" onClick={handleSubmit}>
+            Enviar para análise
+          </CustomButton>
         </Box>
       </Box>
     </Box>
