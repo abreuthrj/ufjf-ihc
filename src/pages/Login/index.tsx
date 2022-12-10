@@ -4,7 +4,6 @@ import { FormControlLabel } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
 import {
   AnotherOptions,
   CheckboxLabel,
@@ -59,7 +58,6 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <Header />
       <Container>
         <Content>
           <Title variant="h1">Entrar</Title>

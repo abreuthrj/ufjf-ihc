@@ -10,10 +10,17 @@ const Home: React.FC = () => {
     <CustomContainer>
       <PageTitle>Início</PageTitle>
 
-      <UserProgress />
+      <UserProgress
+        donations={DonationsMock.length}
+        analysing={
+          DonationsMock.filter((d) => d.status === "em análise").length
+        }
+        approves={DonationsMock.filter((d) => d.status === "completa").length}
+        denials={DonationsMock.filter((d) => d.status === "recusada").length}
+      />
 
       <CustomSubtitle>Suas doações</CustomSubtitle>
-      <DonationList max={3} donations={DonationsMock} />
+      <DonationList max={5} donations={DonationsMock} />
     </CustomContainer>
   );
 };

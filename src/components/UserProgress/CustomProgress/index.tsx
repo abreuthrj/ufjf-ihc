@@ -12,7 +12,16 @@ type CustomProgressProps = {
 
 const CustomProgress: React.FC<CustomProgressProps> = (props) => {
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" mx="auto">
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      mx="auto"
+      bgcolor="#fafafa"
+      borderRadius={2}
+      px={8}
+      py={6}
+    >
       <Box position="relative">
         <S.Progress {...props.CircularProgressProps} variant="determinate" />
 

@@ -2,14 +2,26 @@ import React from "react";
 import CustomProgress from "./CustomProgress";
 import * as S from "./styles";
 
-const UserProgress: React.FC = () => {
+export type UserProgressProps = {
+  donations: number;
+  approves: number;
+  denials: number;
+  analysing: number;
+};
+
+const UserProgress: React.FC<UserProgressProps> = ({
+  approves,
+  denials,
+  donations,
+  analysing,
+}) => {
   return (
     <S.Container>
       <CustomProgress
         showValue
-        label="Doações"
+        label="Em análise"
         CircularProgressProps={{
-          value: 20,
+          value: Math.round((analysing / donations) * 100),
           size: 60,
         }}
       />
@@ -17,7 +29,7 @@ const UserProgress: React.FC = () => {
         showValue
         label="Aprovações"
         CircularProgressProps={{
-          value: 50,
+          value: Math.round((approves / donations) * 100),
           color: "success",
           size: 60,
         }}
@@ -26,7 +38,7 @@ const UserProgress: React.FC = () => {
         showValue
         label="Recusas"
         CircularProgressProps={{
-          value: 10,
+          value: Math.round((denials / donations) * 100),
           color: "error",
           size: 60,
         }}

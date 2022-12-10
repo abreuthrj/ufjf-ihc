@@ -22,7 +22,7 @@ export const Title = styled(Typography)((props) => ({
 export const ErrorFeedback = styled(Typography)((props) => ({
   textAlign: "left",
   backgroundColor: "#FF807B",
-  color: "#F10800",
+  color: "white",
   padding: 6,
   borderRadius: 4,
   marginBottom: 16,

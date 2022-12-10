@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import Menu from "../components/Menu";
 import { CustomWrapper } from "../routes/styles";
 
@@ -5,7 +6,10 @@ const withGlobals = (component: React.ReactNode) => {
   return (
     <CustomWrapper>
       <Menu />
-      {component}
+
+      <Box width="100%" height="100%" p={4} overflow="hidden">
+        {component}
+      </Box>
     </CustomWrapper>
   );
 };

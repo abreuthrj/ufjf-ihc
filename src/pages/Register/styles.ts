@@ -12,12 +12,12 @@ export const CustomTitle = styled(Typography)((props) => ({
 
 export const CustomButton = styled(Button)((props) => ({
   marginTop: 12,
-  backgroundColor: props.variant === "outlined" ? "transparent" : "#B000A4",
-  borderColor: "#B000A4",
-  color: props.variant === "outlined" ? "#B000A4" : "white",
+  backgroundColor: props.variant === "contained" ? "#B000A4" : "transparent",
+  borderColor: props.variant === "outlined" ? "#B000A4" : "transparent",
+  color: props.variant === "contained" ? "white" : "#B000A4",
   "&:hover": {
-    backgroundColor: props.variant === "outlined" ? "#91008809" : "#910088",
-    color: props.variant === "outlined" ? "#910088" : "white",
+    backgroundColor: props.variant === "contained" ? "#910088" : "#91008809",
+    color: props.variant === "contained" ? "white" : "#910088",
     borderColor: "#910088",
   },
 }));

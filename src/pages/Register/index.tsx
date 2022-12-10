@@ -1,9 +1,12 @@
 import { Box } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import { CustomButton, CustomInput, CustomTitle } from "./styles";
 
 const Register: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Header />
@@ -26,7 +29,11 @@ const Register: React.FC = () => {
         <CustomButton fullWidth variant="contained">
           Registrar
         </CustomButton>
-        <CustomButton fullWidth variant="outlined">
+        <CustomButton
+          fullWidth
+          variant="outlined"
+          onClick={() => navigate("/login")}
+        >
           Voltar
         </CustomButton>
       </Box>

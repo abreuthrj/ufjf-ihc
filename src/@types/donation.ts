@@ -1,6 +1,15 @@
 export type IDonation = {
   date: Date;
-  items: string[];
+  items: IDonationItem[];
   id: string;
-  status: "waiting" | "analysing" | "complete" | "refused";
+  status: "na fila" | "em análise" | "completa" | "recusada";
+  deliverMethod: "donator" | "employee";
+  deliverLocation?: string;
+};
+
+export type IDonationItem = {
+  id: string;
+  title: string;
+  qtd?: number;
+  gender?: string;
 };

@@ -5,8 +5,6 @@ export const CustomContainer = styled.div`
   width: 400px;
   height: 100%;
 
-  margin-right: 28px;
-
   background-color: purple;
 `;
 

@@ -1,15 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { CustomContainer, CustomItem } from "./styles";
 
 const Menu: React.FC = () => {
-  // const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/login");
+  };
 
   return (
     <CustomContainer>
-      <CustomItem>Home</CustomItem>
-      <CustomItem>Doações</CustomItem>
-      <CustomItem>Nova Doação</CustomItem>
-      <CustomItem>Logout</CustomItem>
+      <CustomItem onClick={() => navigate("/")}>Home</CustomItem>
+      <CustomItem onClick={() => navigate("/donations")}>Doações</CustomItem>
+      <CustomItem onClick={() => navigate("/new-donation")}>
+        Cadastrar doação
+      </CustomItem>
+      <CustomItem onClick={handleLogout}>Logout</CustomItem>
     </CustomContainer>
   );
 };

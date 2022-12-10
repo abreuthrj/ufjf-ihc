@@ -3,11 +3,6 @@ import { ListItemText } from "@mui/material";
 import { IDonation } from "../../@types/donation";
 import theme from "../../theme";
 
-const statusColor = {
-  "na fila": "#03bafc90",
-  "em análise": "#fcba0390",
-};
-
 export const CustomStatus = styled(ListItemText)<{
   dataStatus?: IDonation["status"];
 }>((props) => ({
@@ -29,7 +24,7 @@ export const CustomStatus = styled(ListItemText)<{
   },
 }));
 
-export const CustomDate = styled(ListItemText)((props) => ({
+export const CustomTitle = styled(ListItemText)((props) => ({
   span: {
     fontWeight: 600,
     color: theme.dark,
