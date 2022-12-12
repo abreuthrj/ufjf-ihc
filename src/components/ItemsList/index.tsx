@@ -16,7 +16,7 @@ export type ItemsListProps = {
   items: IDonationItem[];
   max?: number;
   allowDelete?: boolean;
-  onDelete?: () => void;
+  onDelete?: (id: string) => void;
 };
 
 const ItemsList: React.FC<ItemsListProps> = ({

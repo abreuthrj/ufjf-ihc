@@ -13,12 +13,20 @@ import {
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { IDonationItem } from "../../@types/donation";
 import ItemsList from "../../components/ItemsList";
 import PageTitle from "../../components/PageTitle";
 import ItemsMock from "../../_mocks_/items";
 import { CustomButton } from "../Register/styles";
 
-const FORM_INITIAL = {
+const FORM_INITIAL: {
+  receptionMethod: string;
+  location: string;
+  currentItem: string;
+  currentItemQtd: number;
+  currentItemGender: string;
+  items: IDonationItem[];
+} = {
   receptionMethod: "donator",
   location: "",
   currentItem: "",
