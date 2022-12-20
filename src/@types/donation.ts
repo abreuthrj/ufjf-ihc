@@ -5,6 +5,7 @@ export type IDonation = {
   status: "na fila" | "em análise" | "completa" | "recusada";
   deliverMethod: "donator" | "employee";
   deliverLocation?: string;
+  description?: string;
 };
 
 export type IDonationItem = {

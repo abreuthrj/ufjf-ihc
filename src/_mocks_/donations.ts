@@ -40,7 +40,7 @@ const DonationsMock: IDonation[] = [
         gender: "female",
       },
     ],
-    status: "em análise",
+    status: "na fila",
   },
   {
     id: "fb8b8871-e284-4d56-b5eb-8f04049a5bd8",

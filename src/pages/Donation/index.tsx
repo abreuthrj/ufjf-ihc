@@ -1,11 +1,12 @@
 import { Box, Breadcrumbs, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { IDonation } from "../../@types/donation";
 import { CustomStatus } from "../../components/DonationList/styles";
 import ItemsList from "../../components/ItemsList";
 import PageTitle from "../../components/PageTitle";
-import DonationsMock from "../../_mocks_/donations";
+import { useAuth } from "../../contexts/Auth";
+import { useStore } from "../../contexts/Store";
+import { CustomButton } from "../Register/styles";
 
 type NavParams = {
   id: string;
@@ -14,11 +15,20 @@ type NavParams = {
 const Donation: React.FC = () => {
   const { id } = useParams<NavParams>();
 
-  const [donation, setDonation] = useState<IDonation>();
+  const { role } = useAuth();
+  const store = useStore();
 
-  useEffect(() => {
-    setDonation(DonationsMock.find((d) => d.id === id));
-  }, [id]);
+  const donation = store.donations.find((d) => d.id === id);
+
+  if (!donation) return <>Not found</>;
+
+  const handleApprove = () => {
+    store.donation.set({ ...donation, status: "em análise" });
+  };
+
+  const handleRefuse = () => {
+    store.donation.set({ ...donation, status: "recusada" });
+  };
 
   return (
     <Box width="100%">
@@ -50,10 +60,31 @@ const Donation: React.FC = () => {
         </Typography>
       )}
 
+      {!!donation?.description && (
+        <Typography sx={{ my: 4, color: "lightgray" }}>
+          {donation?.description}
+        </Typography>
+      )}
+
       <Typography variant="h6" mt={4}>
         Itens
       </Typography>
       <ItemsList items={donation?.items || []} />
+
+      {role === "admin" && donation?.status === "na fila" && (
+        <Box display="flex" width="100%" alignItems="center" mt={4}>
+          <CustomButton variant="outlined" onClick={handleRefuse}>
+            Recusar
+          </CustomButton>
+          <CustomButton
+            variant="contained"
+            sx={{ px: 8, ml: 2 }}
+            onClick={handleApprove}
+          >
+            Aceitar
+          </CustomButton>
+        </Box>
+      )}
     </Box>
   );
 };

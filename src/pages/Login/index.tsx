@@ -4,6 +4,8 @@ import { FormControlLabel } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/Auth";
+import UsersMock from "../../_mocks_/users";
 import {
   AnotherOptions,
   CheckboxLabel,
@@ -21,14 +23,12 @@ import {
 } from "./styles";
 
 const Login: React.FC = () => {
-  interface IUser {
-    validEmail: string;
-    validPassword: string;
-  }
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState("");
+
+  const auth = useAuth();
 
   const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -38,22 +38,22 @@ const Login: React.FC = () => {
   };
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // User test to a valid login
-    const validLogin: IUser = {
-      validEmail: "exemplo@gmail.com",
-      validPassword: "exemplo123",
-    };
+    const user = UsersMock.find((u) => u.email === email);
 
-    if (
-      !(
-        email === validLogin.validEmail && password === validLogin.validPassword
-      )
-    ) {
-      setLoginStatus("Error");
-    } else {
+    if (user?.password === password) {
+      auth.update({
+        token: user.id,
+        role: user.role,
+      });
+
       navigate("/");
+
       setLoginStatus("Success");
+
+      return;
     }
+
+    setLoginStatus("Error");
   };
 
   return (
@@ -61,7 +61,7 @@ const Login: React.FC = () => {
       <Container>
         <Content>
           <Title variant="h1">Entrar</Title>
-          <Form>
+          <Form onSubmit={(e) => e.preventDefault()}>
             {loginStatus == "Error" && (
               <ErrorFeedback>Email ou Senha incorretos</ErrorFeedback>
             )}

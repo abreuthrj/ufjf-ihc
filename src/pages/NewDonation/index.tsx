@@ -13,30 +13,36 @@ import {
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { IDonationItem } from "../../@types/donation";
+import { v4 } from "uuid";
+import { IDonation, IDonationItem } from "../../@types/donation";
 import ItemsList from "../../components/ItemsList";
 import PageTitle from "../../components/PageTitle";
+import { useStore } from "../../contexts/Store";
 import ItemsMock from "../../_mocks_/items";
 import { CustomButton } from "../Register/styles";
 
 const FORM_INITIAL: {
-  receptionMethod: string;
+  receptionMethod: IDonation["deliverMethod"];
   location: string;
   currentItem: string;
   currentItemQtd: number;
   currentItemGender: string;
+  description: string;
   items: IDonationItem[];
 } = {
   receptionMethod: "donator",
   location: "",
   currentItem: "",
   currentItemQtd: 1,
+  description: "",
   currentItemGender: "unissex",
   items: [],
 };
 
 const NewDonation: React.FC = () => {
   const navigate = useNavigate();
+
+  const { donation } = useStore();
 
   const [
     {
@@ -45,6 +51,7 @@ const NewDonation: React.FC = () => {
       currentItem,
       currentItemQtd,
       items,
+      description,
       currentItemGender,
     },
     setForm,
@@ -83,7 +90,18 @@ const NewDonation: React.FC = () => {
       type: "success",
     });
 
+    donation.add({
+      id: v4(),
+      date: new Date(),
+      status: "na fila",
+      deliverMethod: receptionMethod,
+      deliverLocation: location,
+      description,
+      items,
+    });
+
     setForm(FORM_INITIAL);
+    navigate("/donations");
   };
 
   const handleCancel = () => {
@@ -127,9 +145,17 @@ const NewDonation: React.FC = () => {
           name="street-address"
           label="Local"
           value={location}
+          onChange={(e) => updateForm({ location: e.target.value })}
           disabled={receptionMethod === "donator"}
         />
-        <TextField multiline fullWidth label="Observação" rows={5} />
+        <TextField
+          multiline
+          fullWidth
+          label="Observação"
+          rows={5}
+          value={description}
+          onChange={(e) => updateForm({ description: e.target.value })}
+        />
 
         <Box display="flex" columnGap={1}>
           <TextField

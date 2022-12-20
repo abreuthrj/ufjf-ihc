@@ -2,11 +2,14 @@ import { IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/Auth";
 import { Background, CustomContainer, CustomItem, MenuIcon } from "./styles";
 
 const Menu: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const { role } = useAuth();
 
   const [mobile, setMobile] = useState(false);
   const [mobileVisible, setMobileVisible] = useState(false);
@@ -53,12 +56,16 @@ const Menu: React.FC = () => {
       {((mobile && mobileVisible) || !mobile) && (
         <CustomContainer mobileVisible={mobileVisible}>
           <CustomItem onClick={() => navigate("/")}>Home</CustomItem>
-          <CustomItem onClick={() => navigate("/donations")}>
-            Doações
-          </CustomItem>
-          <CustomItem onClick={() => navigate("/new-donation")}>
-            Cadastrar doação
-          </CustomItem>
+          {role === "user" && (
+            <>
+              <CustomItem onClick={() => navigate("/donations")}>
+                Doações
+              </CustomItem>
+              <CustomItem onClick={() => navigate("/new-donation")}>
+                Cadastrar doação
+              </CustomItem>
+            </>
+          )}
           <CustomItem onClick={handleLogout}>Logout</CustomItem>
         </CustomContainer>
       )}

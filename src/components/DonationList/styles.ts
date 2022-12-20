@@ -14,9 +14,9 @@ export const CustomStatus = styled(ListItemText)<{
   span: {
     backgroundColor:
       props.dataStatus === "na fila"
-        ? "#03bafc90"
-        : props.dataStatus === "em análise"
         ? "#fcba0390"
+        : props.dataStatus === "em análise"
+        ? "#03bafc90"
         : props.dataStatus === "completa"
         ? "#7CF2A9"
         : "#F5795B",
