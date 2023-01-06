@@ -57,64 +57,63 @@ const Login: React.FC = () => {
   };
 
   return (
-    <>
-      <Container>
-        <Content>
-          <Title variant="h1">Entrar</Title>
-          <Form onSubmit={(e) => e.preventDefault()}>
-            {loginStatus == "Error" && (
-              <ErrorFeedback>Email ou Senha incorretos</ErrorFeedback>
-            )}
+    <Container>
+      <Content>
+        <Title variant="h1">Entrar</Title>
+        <Form onSubmit={(e) => e.preventDefault()}>
+          {loginStatus == "Error" && (
+            <ErrorFeedback>Email ou Senha incorretos</ErrorFeedback>
+          )}
 
-            <InputContainer>
-              <CustomInput
-                startAdornment={
-                  <InputAdornment position="start">
-                    <AccountCircleIcon />
-                  </InputAdornment>
-                }
-                placeholder="Endereço de Email"
-                type="email"
-                onChange={handleEmailInput}
-                required
-              />
-            </InputContainer>
-            <InputContainer>
-              <CustomInput
-                startAdornment={
-                  <InputAdornment position="start">
-                    <LockIcon />
-                  </InputAdornment>
-                }
-                required
-                placeholder="Senha"
-                type="password"
-                onChange={handlePasswordInput}
-              />
-            </InputContainer>
-
-            <FormControlLabel
-              control={<RememberCheckbox />}
-              label={<CheckboxLabel>Lembrar-se de mim?</CheckboxLabel>}
+          <InputContainer>
+            <CustomInput
+              startAdornment={
+                <InputAdornment position="start">
+                  <AccountCircleIcon />
+                </InputAdornment>
+              }
+              placeholder="Endereço de Email"
+              type="email"
+              onChange={handleEmailInput}
+              required
             />
+          </InputContainer>
+          <InputContainer>
+            <CustomInput
+              startAdornment={
+                <InputAdornment position="start">
+                  <LockIcon />
+                </InputAdornment>
+              }
+              required
+              placeholder="Senha"
+              type="password"
+              onChange={handlePasswordInput}
+            />
+          </InputContainer>
 
-            <CustomButton
-              variant="contained"
-              type="submit"
-              onClick={handleSubmit}
-            >
-              Entrar
-            </CustomButton>
-            <CustomButton variant="outlined">Esqueceu a senha?</CustomButton>
-          </Form>
-          <AnotherOptions>
-            <LinksText>
-              Nao tem uma conta? <Links href="/register">Criar conta</Links>
-            </LinksText>
-          </AnotherOptions>
-        </Content>
-      </Container>
-    </>
+          <FormControlLabel
+            control={<RememberCheckbox />}
+            label={<CheckboxLabel>Lembrar-se de mim?</CheckboxLabel>}
+          />
+
+          <CustomButton
+            variant="contained"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            Entrar
+          </CustomButton>
+          <CustomButton variant="outlined">Esqueceu a senha?</CustomButton>
+        </Form>
+        <AnotherOptions>
+          <LinksText>
+            Nao tem uma conta?{" "}
+            <Links onClick={() => navigate("/register")}>Criar conta</Links>
+          </LinksText>
+        </AnotherOptions>
+      </Content>
+    </Container>
   );
 };
 

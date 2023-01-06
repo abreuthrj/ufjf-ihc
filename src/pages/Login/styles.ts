@@ -10,6 +10,8 @@ export const Container = styled.div`
   flex-direction: column;
   text-align: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
 `;
 
 export const Title = styled(Typography)((props) => ({
